@@ -1,5 +1,5 @@
-var util = require("util");
-var mysql = require("mysql");
+const util = require("util");
+const mysql = require("mysql");
 
 
 // create the connection information for the sql database

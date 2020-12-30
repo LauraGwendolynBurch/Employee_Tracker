@@ -17,6 +17,20 @@ function askForAction() {
         "VIEW_EMPLOYEE",
         "CREATE_ROLE",
         "QUIT"
+        // quit
+        // view all employees
+        // view all employees by department 
+        // view all employees by manager 
+        // add employee
+        // remove emplyee
+        // update employee role
+        // update employee manager
+        // view all the roles
+        // add role
+        // remove role
+        // view all departments
+        // add department
+        // remove department 
       ]
     })
     .then((res) => {
@@ -27,15 +41,19 @@ function askForAction() {
           return;
 
         case "VIEW_ROLE":
-
+          viewRole()
           return;
 
         case "VIEW_EMPLOYEE":
-
+          viewEmployee()
           return;
 
         case "CREATE_ROLE":
           createRole();
+          return;
+
+        case "QUIT":
+          connection.end();
           return;
 
         default:
@@ -55,8 +73,28 @@ function viewDepartment() {
       console.table(results);
       askForAction();
     });
-
 }
+
+function viewRole() {
+
+  db
+    .getRoles()
+    .then((results) => {
+      console.table(results);
+      askForAction();
+    });
+}
+
+function viewEmployee() {
+
+  db
+    .getEmployees()
+    .then((results) => {
+      console.table(results);
+      askForAction();
+    });
+}
+
 
 function createRole() {
 
@@ -88,6 +126,8 @@ db.getDepartment().then((results) => {
   console.log(results);
 
 })
+
+askForAction()
 
 // quit
 // view all employees

@@ -1,96 +1,91 @@
 const db = require("./db");
 const inquirer = require("inquirer");
 const connection = require("./db/connection");
+const header = require("asciiart-logo");
+const table = require('console.table');
 
-function askForAction (){
+function askForAction() {
 
-    inquirer
-        .prompt({
-            message: "Choose something to do",
-            name: "action", 
+  inquirer
+    .prompt({
+      message: "Choose something to do",
+      name: "action",
+      type: "list",
+      choices: [
+        "VIEW_DEPARTMENT",
+        "VIEW_ROLE",
+        "VIEW_EMPLOYEE",
+        "CREATE_ROLE",
+        "QUIT"
+      ]
+    })
+    .then((res) => {
+
+      switch (res.action) {
+        case "VIEW_DEPARTMENT":
+          viewDepartment();
+          return;
+
+        case "VIEW_ROLE":
+
+          return;
+
+        case "VIEW_EMPLOYEE":
+
+          return;
+
+        case "CREATE_ROLE":
+          createRole();
+          return;
+
+        default:
+          connection.end();
+
+      }
+
+
+    })
+}
+
+function viewDepartment() {
+
+  db
+    .getDepartment()
+    .then((results) => {
+      console.table(results);
+      askForAction();
+    });
+
+}
+
+function createRole() {
+
+  db
+    .getDepartment()
+    .then((department) => {
+
+      const departmentChoices = department.map((department) => ({
+        value: department.id,
+        name: department.name
+      }))
+
+      inquirer
+        .prompt([
+          {
+
+            message: "What department is this role for?",
             type: "list",
-            choices: [
-                "VIEW_DEPARTMENT",
-                "VIEW_ROLE",
-                "VIEW_EMPLOYEE",
-                "CREATE_ROLE",
-                "QUIT"
-            ]
+            name: "department_id",
+            choices: departmentChoices
 
-
-        }).then((res) =>{
-
-            switch (res.action) {
-                case "VIEW_DEPARTMENT":
-                  viewDepartments();
-                  return;
-          
-                case "VIEW_ROLE":
-                
-                  return;
-          
-                case "VIEW_EMPLOYEE":
-                  
-                  return;
-
-                case "CREATE_ROLE":
-                  createRole();
-                    return;
-          
-                default:
-                  connection.end();
-                  
-                }
-
-
-        })
+          }
+        ])
+    });
 }
 
-function viewDepartments() {
+db.getDepartment().then((results) => {
 
-    db  
-        .getDepartments()
-        .then(( results ) =>{
-            console.table( results );
-            askForAction();
-        });
-
-}
-
-function createRole(){
-
-  db  
-        .getDepartments()
-        .then(( departments ) =>{
-
-          const departmentChoices = department.map( (department) => ({
-            value: department.id,
-            name: department.name
-          }))
-
-          inquirer
-            .prompt([
-              {
-
-                message: "What department is this role for?",
-                type: "list",
-                name: "department_id",
-                choices: departmentChoices
-               
-              }
-
-
-            ])
-        });
-
-  
-
-
-}
-
-db.getDepartments().then((results) =>{
-
-    console.log(results);
+  console.log(results);
 
 })
 

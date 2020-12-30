@@ -1,24 +1,24 @@
 const connection = require('./connection');
 
 module.exports = {
-    getDepartments(){
+    getDepartment() {
 
         return connection.query("SELECT * FROM department")
 
-    }, 
-    getRoles(){
+    },
+    getRoles() {
 
         return connection.query("SELECT * FROM role")
 
-    }, 
-    getEmployees(){
+    },
+    getEmployees() {
 
         return connection.query("SELECT * FROM employee")
-        
-    },
-    insertRole( data ){
 
-        return connection.query("INSERT INTO role", data );
+    },
+    insertRole(data) {
+
+        return connection.query("INSERT INTO role", data);
 
     }
 }

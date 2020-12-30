@@ -13,6 +13,7 @@ function askForAction (){
                 "VIEW_DEPARTMENT",
                 "VIEW_ROLE",
                 "VIEW_EMPLOYEE",
+                "CREATE_ROLE",
                 "QUIT"
             ]
 
@@ -22,19 +23,23 @@ function askForAction (){
             switch (res.action) {
                 case "VIEW_DEPARTMENT":
                   viewDepartments();
-                  break;
+                  return;
           
                 case "VIEW_ROLE":
                 
-                  break;
+                  return;
           
                 case "VIEW_EMPLOYEE":
                   
-                  break;
+                  return;
+
+                case "CREATE_ROLE":
+                  createRole();
+                    return;
           
-                case "QUIT":
+                default:
                   connection.end();
-                  break;
+                  
                 }
 
 
@@ -52,8 +57,56 @@ function viewDepartments() {
 
 }
 
+function createRole(){
+
+  db  
+        .getDepartments()
+        .then(( departments ) =>{
+
+          const departmentChoices = department.map( (department) => ({
+            value: department.id,
+            name: department.name
+          }))
+
+          inquirer
+            .prompt([
+              {
+
+                message: "What department is this role for?",
+                type: "list",
+                name: "department_id",
+                choices: departmentChoices
+               
+              }
+
+
+            ])
+        });
+
+  
+
+
+}
+
 db.getDepartments().then((results) =>{
 
     console.log(results);
 
 })
+
+// quit
+// view all employees
+// view all employees by department 
+// view all employees by manager 
+// add employee
+// remove emplyee
+// update employee role
+// update employee manager
+// view all the roles
+// add role
+// remove role
+// view all departments
+// add department
+// remove department 
+
+

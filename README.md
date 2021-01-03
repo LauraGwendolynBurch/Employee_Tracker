@@ -1,1 +1,77 @@
 # Employee_Tracker
+
+## Description
+
+## Table of Contents
+
+* [Title](#Title)
+
+* [Description](##Description)
+
+* [Link-to-project](##Link-to-project)
+
+* [Installation](##Installation)
+
+* [User-Story](##User-Story)
+
+* [License](##License)
+
+* [Contribution](##Contribution)  
+
+* [Test](##Test)
+
+* [Images](##Images)
+
+* [Credits](##Credits)
+
+* [Questions](##Questions)
+
+
+
+## Link-to-project 
+[Github Repo Employee_Tracker](https://github.com/LauraGwendolynBurch/Employee_Tracker)
+
+
+## Installation
+* NPM i inquirer
+* NPM i mysql
+
+## User-Story
+As a business owner
+I want to be able to view and manage the departments, roles, and employees in my company
+So that I can organize and plan my business
+  
+
+## License
+[Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
+
+
+## Contribution
+Clone repo | Push changes | Create Pull request
+
+## Test
+[Click here for walk through]()
+
+![Sample Video of Project ](./images/video.gif)
+
+## Image of sample code
+![Sample Image of Project](./images/samplecode1.png)
+
+## Image of sample code
+![Sample Image of Project](./images/samplecode.png)
+
+## Credits
+Anna Conover (tutor)
+
+LevelApp (tutor)
+
+University of Washington Bootcamp TAs and Instructor
+
+Study Group: Aaron Parnell, Keenan Reed, Sally Perez, Rattanak Leng
+
+## Questions
+GitHub Username: [LauraGwendolynBurch](https://github.com/LauraGwendolynBurch)
+
+Email: <lauraburch.lb@gmail.com>
+
+

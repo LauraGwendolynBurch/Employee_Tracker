@@ -9,11 +9,7 @@ const connection = mysql.createConnection({
   database: "employees"
 });
 
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("Connected as id" + connection.threadId);
-});
-
+connection.connect()
 
 connection.query = util.promisify(connection.query);
 

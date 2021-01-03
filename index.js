@@ -15,8 +15,11 @@ function askForAction() {
         "VIEW_DEPARTMENT",
         "VIEW_ROLE",
         "VIEW_EMPLOYEE",
-        "CREATE_ROLE",
-        "QUIT"
+        "ADD_DEPARTMENT",
+        "ADD_ROLE",
+        "ADD_EMPLOYEE",
+        "UPDATE_EMPLOYEE_ROLES",
+        "QUIT",
         // quit
         // view all employees
         // view all employees by department 
@@ -48,8 +51,20 @@ function askForAction() {
           viewEmployee()
           return;
 
-        case "CREATE_ROLE":
-          createRole();
+        case "ADD_DEPARTMENT":
+          addDepartment();
+          return;
+
+        case "ADD_ROLE":
+          addRole();
+          return;
+
+        case "ADD_EMPLOYEE":
+          addemployee();
+          return;
+
+        case "UPDATE_EMPLOYEE_ROLES":
+          updateEmployeeRoles();
           return;
 
         case "QUIT":
@@ -95,14 +110,32 @@ function viewEmployee() {
     });
 }
 
+function addDepartment() {
 
-function createRole() {
+  inquirer
+    .prompt([
+      {
+
+        message: "What is your department name?",
+        type: "input",
+        name: "department_name",
+
+      }
+    ])
+    .then(function(department) {
+      db
+      .createDepartment(department)
+      askForAction()
+    });
+}
+
+function addRole() {
 
   db
     .getDepartment()
-    .then((department) => {
+    .then((departments) => {
 
-      const departmentChoices = department.map((department) => ({
+      const departmentChoices = departments.map((department) => ({
         value: department.id,
         name: department.name
       }))
@@ -113,35 +146,67 @@ function createRole() {
 
             message: "What department is this role for?",
             type: "list",
-            name: "department_id",
+            name: "departmentId",
             choices: departmentChoices
 
-          }
+          },
+          {
+
+            message: "What is the title for this role?",
+            type: "input",
+            name: "titleName",
+
+          },
+          {
+
+            message: "What is the salary for this role?",
+            type: "input",
+            name: "salaryAmount",
+           
+          },
+          
         ])
+        .then(function(results) {
+          db
+          .createRole(results)
+          askForAction()
+        });
     });
 }
 
-db.getDepartment().then((results) => {
+// function  addemployee() {
 
-  console.log(results);
+//   db
+//     .getDepartment()
+//     .then((department) => {
 
-})
+//       const departmentChoices = department.map((department) => ({
+//         value: department.id,
+//         name: department.name
+//       }))
+
+//       inquirer
+//         .prompt([
+//           {
+
+//             message: "What department is this role for?",
+//             type: "list",
+//             name: "department_id",
+//             choices: departmentChoices
+
+//           }
+//         ])
+//     });
+// }
+
+// db.getDepartment().then((results) => {
+
+//   // console.log(results);
+
+// })
 
 askForAction()
 
-// quit
-// view all employees
-// view all employees by department 
-// view all employees by manager 
-// add employee
-// remove emplyee
-// update employee role
-// update employee manager
-// view all the roles
-// add role
-// remove role
-// view all departments
-// add department
-// remove department 
+
 
 

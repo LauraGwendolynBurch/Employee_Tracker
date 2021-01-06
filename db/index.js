@@ -25,7 +25,7 @@ module.exports = {
         )
 
     },
-    createRole(results){
+    createRole(results) {
 
 
         return connection.query("INSERT INTO role SET ?",
@@ -37,5 +37,17 @@ module.exports = {
         )
 
 
+    },
+    createEmployee(results) {
+
+        return connection.query("INSERT INTO employee SET ?",
+            {
+                role_id: results.roleId,
+                first_name: results.firstName,
+                last_name: results.lastName,
+                manager_id: results.managerId
+                
+            }
+        )
     }
 }

@@ -13,7 +13,7 @@ CREATE TABLE role (
     title VARCHAR(30) UNIQUE NOT NULL,
     salary DECIMAL unsigned NOT NULL,
     department_id INT unsigned NOT NULL,
-    index dep_ind (department_id),
+    index dep_in (department_id),
     constraint fk_department foreign key (department_id) references department(id) on delete CASCADE 
 );
 

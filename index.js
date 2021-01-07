@@ -21,20 +21,20 @@ function askForAction() {
         "ADD_EMPLOYEE",
         "UPDATE_EMPLOYEE_ROLES",
         "QUIT",
-      
+
         // view all employees
-          // view all employees by department 
-          // view all employees by manager 
+        // view all employees by department 
+        // view all employees by manager 
         // add employee
-          // remove emplyee
+        // remove emplyee
         // update employee role
-          // update employee manager
+        // update employee manager
         // view all the roles
         // add role
-          // remove role
+        // remove role
         // view all departments
         // add department
-          // remove department 
+        // remove department 
       ]
     })
     .then((res) => {
@@ -123,9 +123,9 @@ function addDepartment() {
 
       }
     ])
-    .then(function(department) {
+    .then(function (department) {
       db
-      .createDepartment(department)
+        .createDepartment(department)
       askForAction()
     });
 }
@@ -163,28 +163,44 @@ function addRole() {
             message: "What is the salary for this role?",
             type: "input",
             name: "salaryAmount",
-           
+
           },
-          
+
         ])
-        .then(function(results) {
+        .then(function (results) {
           db
-          .createRole(results)
+            .createRole(results)
           askForAction()
         });
     });
 }
 
-function  addemployee() {
+function addemployee() {
+  let employeeList;
+  db.getEmployees()
+    .then((employees) => {
 
+      employeeList = employees.map((employee) => ({
+
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+
+      }))
+      console.log(employeeList)
+      employeeList.push({
+        name: "none",
+        value: null
+      })
+      console.log(employeeList)
+    })
   db
     .getRoles()
     .then((roles) => {
 
       const roleChoices = roles.map((role) => ({
-        name: role.name,
+        name: role.title,
         value: role.id
-        
+
       }))
 
       inquirer
@@ -195,7 +211,7 @@ function  addemployee() {
             message: "What is role is this employee going in?",
             type: "list",
             name: "roleId",
-            choices: roleChoices.name
+            choices: roleChoices
 
           },
           {
@@ -210,20 +226,21 @@ function  addemployee() {
             message: "What is the the last name of this employee?",
             type: "input",
             name: "lastName",
-           
+
           },
           {
 
-            message: "Who is the manager for this employee?",
-            type: "input",
+            message: "Who is the manager id for this employee?",
+            type: "list",
             name: "managerId",
-           
+            choices: employeeList
+
           },
-          
+
         ])
-        .then(function(results) {
+        .then(function (results) {
           db
-          .createEmployee(results)
+            .createEmployee(results)
           askForAction()
         });
     });

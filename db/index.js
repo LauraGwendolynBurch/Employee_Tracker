@@ -1,6 +1,18 @@
 const connection = require('./connection');
 
 module.exports = {
+    viewInfo(){
+
+        return connection.query(`SELECT ee.first_name, ee.last_name, ro.title, de.name, emp.first_name, emp.last_name
+                                FROM employee ee
+                                LEFT JOIN role ro
+                                ON ee.role_id = ro.id
+                                LEFT JOIN department de
+                                ON ro.department_id = de.id
+                                LEFT JOIN employee emp
+                                ON ee.manager_id = emp.id`)
+
+    },
     getDepartment() {
 
         return connection.query("SELECT * FROM department")
@@ -49,5 +61,18 @@ module.exports = {
                 
             }
         )
-    }
+    },
+    updateRole(results) {
+
+        return connection.query("UPDATE employee SET ? WHERE ?",
+        [
+            {
+                role_id: results.roleId
+            },
+            {
+                id: results.id 
+            }
+        ])
+    },
+
 }

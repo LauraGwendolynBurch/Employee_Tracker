@@ -1,9 +1,26 @@
 const db = require("./db");
 const inquirer = require("inquirer");
 const connection = require("./db/connection");
-const header = require("asciiart-logo");
-const logo = require('console.table');
+const logo = require("asciiart-logo");
+const cTable = require('console.table');
 
+console.log(
+  logo({
+    name: 'Employee Tracker',
+    font: 'Speed',
+    lineChars: 10,
+    padding: 2,
+    margin: 3,
+    borderColor: 'grey',
+    logoColor: 'bold-green',
+    textColor: 'green',
+  })
+    .emptyLine()
+    .right('version 3.7.123')
+    .emptyLine()
+    .center("Manage your team")
+    .render()
+);
 
 function askForAction() {
 
@@ -20,7 +37,7 @@ function askForAction() {
         "ADD_ROLE",
         "ADD_EMPLOYEE",
         "UPDATE_EMPLOYEE_ROLES",
-        "QUIT",
+        "QUIT"
 
         // view all employees
         // view all employees by department 
@@ -104,7 +121,7 @@ function viewRole() {
 function viewEmployee() {
 
   db
-    .getEmployees()
+    .viewInfo()
     .then((results) => {
       console.table(results);
       askForAction();
@@ -186,12 +203,12 @@ function addemployee() {
         value: employee.id
 
       }))
-      console.log(employeeList)
+
       employeeList.push({
         name: "none",
         value: null
       })
-      console.log(employeeList)
+
     })
   db
     .getRoles()
@@ -230,7 +247,7 @@ function addemployee() {
           },
           {
 
-            message: "Who is the manager id for this employee?",
+            message: "Who is the manager for this employee?",
             type: "list",
             name: "managerId",
             choices: employeeList
@@ -244,6 +261,64 @@ function addemployee() {
           askForAction()
         });
     });
+
+};
+
+function updateEmployeeRoles() {
+
+  db
+    .getEmployees()
+    .then((employees) => {
+
+      const employeeList = employees.map((employee) => ({
+
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+
+      }))
+
+
+      db
+        .getRoles()
+        .then((roles) => {
+
+          const roleChoices = roles.map((role) => ({
+            name: role.title,
+            value: role.id
+
+          }))
+
+          inquirer
+            .prompt([
+
+              {
+
+                message: "What is role is this employee going in?",
+                type: "list",
+                name: "roleId",
+                choices: roleChoices
+
+              },
+
+              {
+
+                message: "Who is the employee you are updating?",
+                type: "list",
+                name: "id",
+                choices: employeeList
+
+              },
+
+            ])
+            .then(function (results) {
+              db
+                .updateRole(results)
+              askForAction()
+            });
+        });
+    })
+
+
 }
 
 askForAction()

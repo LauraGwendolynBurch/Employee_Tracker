@@ -3,7 +3,7 @@ const connection = require('./connection');
 module.exports = {
     viewInfo(){
 
-        return connection.query(`SELECT ee.first_name, ee.last_name, ro.title, de.name, emp.first_name, emp.last_name
+        return connection.query(`SELECT ee.first_name, ee.last_name, ro.title as title, de.name as department, CONCAT(emp.first_name, emp.last_name)as manager
                                 FROM employee ee
                                 LEFT JOIN role ro
                                 ON ee.role_id = ro.id

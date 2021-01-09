@@ -1,6 +1,7 @@
 # Employee_Tracker
 
 ## Description
+This is a command-line application that allows users to: add departments, roles, and employees.  It also allows you to view departments, roles, employees, and update the employee roles.  Soon you will also be able to delete any employee, role, or manager.
 
 ## Table of Contents
 
@@ -52,13 +53,13 @@ Clone repo | Push changes | Create Pull request
 ## Test
 [Click here for walk through]()
 
-![Sample Video of Project ](./images/video.gif)
+![Sample Video of Project ]()
 
 ## Image of sample code
-![Sample Image of Project](./images/samplecode1.png)
+![Sample video of Project](./images/gif.gif)
 
 ## Image of sample code
-![Sample Image of Project](./images/samplecode.png)
+![Sample Image schema set up](./images/image!.png)
 
 ## Credits
 Anna Conover (tutor)

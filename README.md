@@ -51,9 +51,7 @@ So that I can organize and plan my business
 Clone repo | Push changes | Create Pull request
 
 ## Test
-[Click here for walk through]()
-
-![Sample Video of Project ]()
+[Sample Video of Project ](https://drive.google.com/file/d/1J54j02J1PXCPcKobPMwHcrof3HwBJvU6/view)
 
 ## Image of sample code
 ![Sample video of Project](./images/gif.gif)
